@@ -1,1 +1,106 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TKIET Campus Navigator</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#f2f5ff;color:#172554;
+}
+header{
+ background:#173b85;color:white;
+ padding:25px 18px;border-radius:0 0 25px 25px;
+}
+header h1{margin:0 0 8px;font-size:25px}
+header p{margin:0;color:#dbeafe}
+main{padding:18px;max-width:600px;margin:auto}
+input{
+ width:100%;padding:15px;border:1px solid #ccd5e8;
+ border-radius:12px;font-size:16px;margin:15px 0;
+}
+h2{font-size:20px}
+.grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.card{
+ background:white;padding:18px;border-radius:15px;
+ box-shadow:0 3px 12px #00000010;
+}
+.card .emoji{font-size:30px}
+.card h3{margin:10px 0 5px;font-size:16px}
+.card p{font-size:13px;color:#64748b}
+button{
+ background:#2454ae;color:white;border:0;
+ padding:11px 14px;border-radius:9px;
+ font-size:14px;cursor:pointer;
+}
+#results{display:grid;gap:12px}
+footer{text-align:center;padding:25px;color:#64748b}
+</style>
+</head>
+<body>
+<header>
+<h1>🏫 TKIET Navigator</h1>
+<p>Your campus, easier to explore!</p>
+</header>
+
+<main>
+<h2>Find your destination 📍</h2>
+<input id="search" placeholder="Search a campus location..."
+oninput="showPlaces()">
+
+<h2>Explore Campus</h2>
+<div class="grid">
+<div class="card"><div class="emoji">📚</div>
+<h3>Library</h3><p>Study and reading area</p></div>
+<div class="card"><div class="emoji">💻</div>
+<h3>Computer Lab</h3><p>Computer facilities</p></div>
+<div class="card"><div class="emoji">🍽️</div>
+<h3>Canteen</h3><p>Food and refreshments</p></div>
+<div class="card"><div class="emoji">🏢</div>
+<h3>Departments</h3><p>Academic buildings</p></div>
+<div class="card"><div class="emoji">🏥</div>
+<h3>Medical Room</h3><p>First-aid facility</p></div>
+<div class="card"><div class="emoji">🏟️</div>
+<h3>Ground</h3><p>Sports area</p></div>
+</div>
+
+<h2>Campus Directory</h2>
+<div id="results"></div>
+</main>
+
+<footer>
+TKIET Campus Navigator<br>
+Made with ❤️ for students
+</footer>
+
+<script>
+const places=[
+{name:"Library",icon:"📚",info:"Study and reading area"},
+{name:"Computer Lab",icon:"💻",info:"Computer facilities"},
+{name:"Canteen",icon:"🍽️",info:"Food and refreshments"},
+{name:"Departments",icon:"🏢",info:"Academic buildings"},
+{name:"Medical Room",icon:"🏥",info:"First-aid facility"},
+{name:"Ground",icon:"🏟️",info:"Sports area"},
+{name:"Main Office",icon:"🏫",info:"Administrative office"}
+];
+
+function showPlaces(){
+ const q=document.getElementById("search").value.toLowerCase();
+ const filtered=places.filter(p=>p.name.toLowerCase().includes(q));
+ document.getElementById("results").innerHTML=
+ filtered.length ? filtered.map(p=>`
+ <div class="card">
+ <div class="emoji">${p.icon}</div>
+ <h3>${p.name}</h3>
+ <p>${p.info}</p>
+ </div>`).join("") : "<p>No locations found.</p>";
+}
+showPlaces();
+</script>
+</body>
+</html>
